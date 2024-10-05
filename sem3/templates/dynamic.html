@@ -16,9 +16,9 @@
         </tr>
         {% for product in products %}
         <tr>
-            <td>{{product['prod_name']}}</td>
-            <td>{{product['prod_measure']}}</td>
-            <td>{{product['prod_price']}}</td>
+            <td>{{product[0]}}</td>
+            <td>{{product[1]}}</td>
+            <td>{{product[2]}}</td>
         </tr>
         {% endfor %}
     </table>
