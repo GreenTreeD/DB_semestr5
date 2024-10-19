@@ -36,14 +36,16 @@ def product_handler():
 def product_result_handler():
 
     user_data = request.form
-    print(user_data)
+    print("User data: ", user_data)
     res_info = model_route(app.config['db_config'], user_data, provider)
     print("res_info.result = ", res_info.result)
     if res_info.status:
-        prod_title = 'Результаты из БД'
-        return render_template("dynamic.html", prod_title=prod_title, products=res_info.result)
+        if res_info.result:
+            prod_title = 'Результаты из БД'
+            return render_template("dynamic.html", prod_title=prod_title, products=res_info.result)
+        return "Нет результатов"
     else:
-        return "Вы лапка"
+        return "При выполнении произошла ошибка...."
 
 
 

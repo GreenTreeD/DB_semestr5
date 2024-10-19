@@ -15,7 +15,7 @@ class DBContextManager:
             self.cursor = self.conn.cursor()
             return self.cursor
         except OperationalError as err:
-            print(err.args)
+            print("Operational error:", err.args)
             return None
 
     def __exit__(self, exc_type, exc_val, exc_tb):

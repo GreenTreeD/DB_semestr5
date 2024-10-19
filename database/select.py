@@ -2,6 +2,7 @@
 # функции связанные с выполнением запроса в базу данных
 
 from database.DBcm import DBContextManager
+from pymysql.err import OperationalError
 
 
 def select_list(db_config: dict, _sql: str):
@@ -15,17 +16,27 @@ def select_list(db_config: dict, _sql: str):
     # выполняются все действия в функции, если возникает ошибка, то вызывается метод __error__
     # вот такая вот передача управления в неявном виде...
 
+    result = ()
+    schema = []
     with DBContextManager(db_config) as cursor:
+
         if cursor is None:
             raise ValueError("Cursor not created")
         else:
-            cursor.execute(_sql)
-            result = cursor.fetchall()
+            try:
+                cursor.execute(_sql)
+                result = cursor.fetchall()
+            except OperationalError as error:
+                print("error: ", error)
+                return result, schema
+            else:
+                print("Cursor no errors")
             # print(cursor.description)
             # в cursor.description[0] лежат имена полей из таблицы
 
             schema = [item[0] for item in cursor.description]
-            return result, schema
+
+    return result, schema
 
 def select_dict(db_config: dict, _sql: str):
     result, schema = select_list(db_config, _sql)
