@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Главное меню</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 </head>
 <body>
-    <h7>{{message}}</h7>
-    <div>
+    <h5>{{message}}</h5>
+    <div class="main">
+        <h2 style="text-align: center;">Главное меню</h2>
         <a href="{{url_for('query_bp.query_index')}}">Работа с запросами</a><br />
         <a href="{{url_for('auth_bp.auth_index')}}">Авторизация</a><br />
         <a href="{{url_for('exit_func')}}">Выход из системы</a> <br />

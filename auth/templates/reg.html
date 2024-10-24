@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+</head>
+<body>
+<div class="main" style="text-align: center;">
+    <h2>Регистрация</h2>
+    <form method="POST" action="">
+        <input name="login" type="text" placeholder="Логин" required /><br /><br />
+        <input name="password" type="password" placeholder="Пароль" required /><br /><br />
+        <input name="password1" type="password" placeholder="Повторите пароль" required /><br /><br />
+        <input type="submit" value="Отправить"/>
+
+    </form>
+    <br />
+    <a href="{{url_for('auth_bp.auth_index')}}">Назад</a>
+
+</div>
+
+</body>
+</html>

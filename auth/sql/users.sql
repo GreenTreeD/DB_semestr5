@@ -1,0 +1,1 @@
+SELECT * FROM `users` WHERE `login` = '$e_login' AND `password` = '$e_password';
