@@ -14,7 +14,6 @@ def login_required(func):
     return wrapper
 
 def group_required(func):
-
     @wraps(func)
     def wrapper(*args, **kwargs):
         if 'user_group' in session:
@@ -26,7 +25,7 @@ def group_required(func):
             if user_role in access and user_bp in access[user_role]:
                 return func(*args, **kwargs)
             else:
-                return 'У вас нет прав'
+                return redirect(url_for('main_menu'))
         else:
             return redirect(url_for('main_menu'))
     return wrapper

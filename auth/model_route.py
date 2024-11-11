@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from database.select import select_string
+from database.insert import insert_one
 
 @dataclass
 class ProductInfoRespronse:
@@ -30,7 +31,7 @@ def model_route_reg_new(db_config, user_input_data, sql_provider):
                             e_login=user_input_data['login'],
                             e_password=user_input_data['password'],
                             e_role='user')
-    result = select_string(db_config, _sql)
+    result = insert_one(db_config, _sql)
     if result:
         return ProductInfoRespronse(tuple(), error_message=error_message, status=True)
     return ProductInfoRespronse(tuple(), error_message=error_message, status=False)

@@ -108,3 +108,24 @@ input[type=submit] {
 
 
 }
+
+table {
+    width: 100%;
+    border-spacing: 10px;
+}
+
+table, th, td {
+    border-width: 0px;
+    color: #35624d;
+    font-family: "Nunito", sans-serif;
+}
+
+th,td {
+border-bottom-width: 2px;
+padding: 5px;
+border-color: #57826e;
+}
+
+tr.title {
+font-weight: 600;
+}

@@ -1,6 +1,6 @@
 
 
-from flask import Flask, render_template, session, json
+from flask import Flask, render_template, session, json, redirect,url_for
 from query.route import blueprint_query
 from auth.route import blueprint_auth
 
@@ -32,12 +32,14 @@ def main_menu():
 
 @app.route('/exit')
 def exit_func():
-    session.clear()
-    return 'До свидания, заходите к нам ещё'
+    if 'user_group' in session:
+        session.clear()
+        return render_template('logout.html')
+    return redirect(url_for('main_menu'))
 
 @app.route('/error')
 def error_message():
-    return render_template("error.html", message=message)
+    return render_template("error.html", message="Какая-то ошибка :(")
 
 if __name__ == '__main__':
     app.run(host="127.0.0.1", port=5001, debug=True)

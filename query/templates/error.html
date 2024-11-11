@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Dynamic</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+<div class="main">
+    <h2>Ошибка!</h2>
+    <p>{{message}}</p>
+    <div class="minimenubox">
+        <a href="{{url_for('main_menu')}}" class="other">Главное меню</a>
+    </div>
+</div>
+
+</body>
+</html>

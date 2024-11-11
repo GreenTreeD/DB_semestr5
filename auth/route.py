@@ -13,6 +13,8 @@ provider = SQLProvider(os.path.join(os.path.dirname(__file__), 'sql'))
 
 @blueprint_auth.route('/', methods=['GET'])
 def auth_index():
+    if 'user_group' in session:
+        session.clear()
     return render_template('static.html')
 
 
@@ -22,13 +24,12 @@ def auth_main():
     res_info = model_route_auth_req(current_app.config['db_config'], user_data, provider)
     print(res_info)
     if not res_info.status:
-        return "Ошибка"
+        return render_template('error_auth.html', message="Ошибка сервера")
     if not res_info.result:
-        return "Ошибка"
+        return render_template('error_auth.html', message="Такой пользователь не существует")
 
-    user_group = res_info.result[0][2]
-    session['user_group'] = user_group
-    session['user_id'] = hashlib.sha256(b"{res_info.result[0][0]}").hexdigest()
+    session['user_group'] = res_info.result[0][3]
+    session['user_id'] = res_info.result[0][0]
     # Заносим в сессию, чтобы все остальные страницы не требовали аутентификацию, т.к. HTTP не помнит, что вы заходили
     # Ко второй лабе доделать заглушку
     print('Выполнена аутентификация')
@@ -40,19 +41,24 @@ def registration_index():
 
 @blueprint_auth.route('/registration', methods=['POST'])
 def registration_main():
+    if 'user_group' in session:
+        session.clear()
     user_data = request.form
     if user_data['password'] != user_data['password1']:
-        return "Пароли не совпадают"
+        return render_template('error.html', message= "Пароли не совпадают")
+    if 'user_id' in session:
+        return render_template('error.html', message="Вы не вышли из учётной записи")
+
     res_info = model_route_reg_exist_check(current_app.config['db_config'], user_data, provider)
     print(res_info)
     if not res_info.status:
-        return "Ошибка"
+        return render_template('error.html', message="Ошибка сервера")
     if res_info.result:
-        return "Такой пользователь уже существует"
+        return render_template('error.html', message="Такой пользователь уже существует")
 
     res_info = model_route_reg_new(current_app.config['db_config'], user_data, provider)
     if not res_info.status:
-        return "Ошибка"
+        return render_template('error.html', message="Ошибка сервера")
 
     print("Регистрация успешна")
 

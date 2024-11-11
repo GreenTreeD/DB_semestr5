@@ -6,16 +6,23 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
 </head>
 <body>
-<div class="main" style="text-align: center;">
+<div class="main auth" style="width:300px; height: 290px;">
     <h2>Авторизация</h2>
+    <hr />
     <form method="POST" action="">
         <input name='login' type="text" placeholder="Логин" required /><br /><br />
-        <input name='password' type="password" placeholder="Пароль" required /><br /><br />
+        <input name='password' type="password" placeholder="Пароль" required /><br />
+        <hr />
         <input type="submit" value="Отправить"/>
 
     </form>
     <br />
-    <span>Впервые на сайте? <a href="{{url_for('auth_bp.registration_index')}}">Зарегистрируйтесь!</a></span>
+    <div class="minimenubox">
+        <a href="{{url_for('auth_bp.registration_index')}}" class="other">Регистрация</a>
+        |
+        <a href="{{url_for('main_menu')}}" class="other">Главное меню</a>
+    </div>
+
 
 </div>
 
