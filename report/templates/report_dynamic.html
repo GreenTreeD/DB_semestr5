@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+</head>
+<body>
+<div class="main">
+    <h2>Отчёт по продажам на {{date_value}}</h2>
+    <hr />
+    {% if status == "True" %}
+    <table>
+        <tr class="title">
+            <td>Продукт</td>
+            <td>Количество</td>
+            <td>Стоимость</td>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{product[0]}}</td>
+            <td>{{product[1]}}</td>
+            <td>{{product[2]}}&nbsp;{{product[3]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <span>{{message}}</span>
+
+    {% endif %}
+    <div class="minimenubox">
+        <a href="{{url_for('main_menu')}}" class="other">Главное меню</a>
+        |
+        <a href="{{url_for('report_bp.report_index')}}" class="other">Работа с запросами</a>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

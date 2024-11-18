@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Главное меню</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="top_message">{{message}}</div>
+    <br>
+    <div class="main" style="height:500px;">
+        <h2>Главное меню</h2>
+        <hr />
+        <a href="{{url_for('query_bp.query_index')}}" class="menus">Работа с запросами</a><br />
+        {% if role == 'manager' %}
+        <a href="{{url_for('report_bp.report_index')}}" class="menus">Работа с отчётами</a><br />
+        {% endif %}
+        <a href="{{url_for('auth_bp.auth_index')}}" class="menus">Авторизация</a><br />
+        <a href="{{url_for('exit_func')}}" class="menus">Выход из системы</a> <br />
+    </div>
+
+</body>
+</html>

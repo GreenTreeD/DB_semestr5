@@ -6,7 +6,6 @@ from pymysql.err import OperationalError
 
 
 def select_list(db_config: dict, _sql: str):
-
     # порядок работы конструкции with
     # инициируются переменные (cursor) в методе __init__
     # управление передаётся методу __enter__
@@ -19,7 +18,6 @@ def select_list(db_config: dict, _sql: str):
     result = ()
     schema = []
     with DBContextManager(db_config) as cursor:
-
         if cursor is None:
             raise ValueError("Cursor not created")
         else:

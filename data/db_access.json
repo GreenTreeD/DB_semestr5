@@ -1,4 +1,4 @@
 {
-  "manager": ["auth_bp", "query_bp"],
+  "manager": ["auth_bp", "query_bp", "report_bp"],
   "admin": ["auth_bp"]
 }

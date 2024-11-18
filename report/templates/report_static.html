@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Работа с отчётами</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+</head>
+<body>
+<div class="main">
+    <h2>Отчёт</h2>
+    <hr />
+    <span>Выберите месяц и год для просмотра отчёта:</span>
+    <br><br>
+    <form method="POST" action="">
+        <input name="yearmonth" type="month" value="{{date_value}}" required>
+        <br><br>
+        <input type="submit" value="Отправить"/>
+
+    </form>
+    <br />
+    <div class="minimenubox">
+        <a href="{{url_for('main_menu')}}" class="other">Главное меню</a>
+    </div>
+
+
+</div>
+
+</body>
+</html>
