@@ -15,9 +15,7 @@
         <h2>Главное меню</h2>
         <hr />
         <a href="{{url_for('query_bp.query_index')}}" class="menus">Работа с запросами</a><br />
-        {% if role == 'manager' %}
         <a href="{{url_for('report_bp.report_index')}}" class="menus">Работа с отчётами</a><br />
-        {% endif %}
         <a href="{{url_for('basket_bp.basket_index')}}" class="menus">Покупки</a><br />
         <a href="{{url_for('auth_bp.auth_index')}}" class="menus">Авторизация</a><br />
         <a href="{{url_for('exit_func')}}" class="menus">Выход из системы</a> <br />

@@ -25,7 +25,7 @@ def select_list(db_config: dict, _sql: str):
                 cursor.execute(_sql)
                 result = cursor.fetchall()
             except OperationalError as error:
-                print("error: ", error)
+                print("error: ", error.args)
                 return result, schema
             else:
                 print("Cursor no errors")

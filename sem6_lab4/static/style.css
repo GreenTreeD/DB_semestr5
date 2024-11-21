@@ -104,7 +104,7 @@ a.other {
     font-size: 0.9rem;
 }
 
-input[type=submit] {
+input[type=submit], button[type=submit] {
     border: none;
     text-decoration: none;
     cursor: pointer;
@@ -117,7 +117,12 @@ input[type=submit] {
     box-shadow: -3px 5px 11px 2px rgb(48 82 65 / 30%);
     font-weight: 600;
     width: 100px;
+}
 
+button[type=submit].plusminus {
+width: 50px !important;
+height: 50px !important;
+border-radius: 25px;
 
 }
 
