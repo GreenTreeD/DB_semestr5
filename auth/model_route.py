@@ -30,7 +30,7 @@ def model_route_reg_new(db_config, user_input_data, sql_provider):
     _sql = sql_provider.get('users_new.sql',
                             e_login=user_input_data['login'],
                             e_password=user_input_data['password'],
-                            e_role='user')
+                            e_group='user')
     result = insert_one(db_config, _sql)
     if result:
         return ProductInfoRespronse(tuple(), error_message=error_message, status=True)

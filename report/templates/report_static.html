@@ -15,9 +15,19 @@
         <input name="yearmonth" type="month" value="{{date_value}}" required>
         <br><br>
         <input type="submit" value="Отправить"/>
-
     </form>
     <br />
+    {% if user_access %}
+    <hr>
+    <span>Выберите месяц или год для создания отчёта:</span>
+        <br><br>
+    <form method="POST" action="">
+        <input name="yearmonthcreate" type="month" value="{{date_value}}" required>
+        <br><br>
+        <input type="submit" value="Отправить"/>
+    </form>
+    <br />
+    {% endif %}
     <div class="minimenubox">
         <a href="{{url_for('main_menu')}}" class="other">Главное меню</a>
     </div>

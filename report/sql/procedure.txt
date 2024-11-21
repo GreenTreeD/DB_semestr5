@@ -1,0 +1,32 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `report_simple`(mmonth INT, yyear INT)
+BEGIN
+
+DECLARE done INT DEFAULT 0;
+DECLARE pprod_name VARCHAR(30);
+DECLARE aamount FLOAT;
+DECLARE pprice FLOAT;
+
+DECLARE c1 CURSOR FOR
+	SELECT prod_name, SUM(amount) AS amount, SUM(selling_price) AS price
+	FROM sell_report JOIN product USING (prod_id)
+	WHERE year(date_of_sale) = "2024"
+	AND month(date_of_sale) = "09"
+	GROUP BY prod_id
+	ORDER BY prod_id;
+
+DECLARE EXIT HANDLER FOR NOT FOUND SET done = 1;
+
+
+IF (SELECT COUNT(*) FROM `report` WHERE `year` = yyear AND `month` = mmonth) = 0
+THEN
+	OPEN c1;
+	FETCH c1 INTO pprod_name, aamount, pprice;
+    WHILE done = 0 DO
+		INSERT INTO `report` VALUES (yyear, mmonth, pprod_name, aamount, pprice);
+		FETCH c1 INTO pprod_name, aamount, pprice;
+	END WHILE;
+ELSE
+  SIGNAL SQLSTATE '23000' SET MESSAGE_TEXT = 'Report already exist.';
+END IF;
+
+END

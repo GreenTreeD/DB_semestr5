@@ -9,7 +9,7 @@
 <div class="main">
     <h2>Отчёт по продажам на {{date_value}}</h2>
     <hr />
-    {% if status == "True" %}
+    {% if status %}
     <table>
         <tr class="title">
             <td>Продукт</td>
@@ -31,7 +31,7 @@
     <div class="minimenubox">
         <a href="{{url_for('main_menu')}}" class="other">Главное меню</a>
         |
-        <a href="{{url_for('report_bp.report_index')}}" class="other">Работа с запросами</a>
+        <a href="{{url_for('report_bp.report_index')}}" class="other">Работа с отчётами</a>
 
     </div>
 
