@@ -1,11 +1,11 @@
 
-Таблицы из базы данных supermarket по просьбам трудящихся:
+Таблицы из базы данных supermarket по просьбам трудящихся:<br>
 ```product```<br>
-users
-sell_report
-report
-user_order
-order_product
+```users```<br>
+```sell_report```<br>
+```report```<br>
+```user_order```<br>
+```order_product```<br>
 
 
 
