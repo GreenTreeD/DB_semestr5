@@ -1,6 +1,6 @@
 
 Таблицы из базы данных supermarket по просьбам трудящихся:
-product
+```product```<br>
 users
 sell_report
 report
