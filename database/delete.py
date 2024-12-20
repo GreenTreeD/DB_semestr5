@@ -10,7 +10,7 @@ def delete(db_config: dict, _sql: str):
             try:
                 cursor.execute(_sql)
             except OperationalError as error:
-                print("error: ", error)
+                print("delete error: ", error)
                 return False
             else:
                 print("Cursor no errors")

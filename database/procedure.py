@@ -1,6 +1,6 @@
 from database.DBcm import DBContextManager
 from pymysql.err import OperationalError
-from pymysql.err import ProgrammingError
+from pymysql.err import Error
 
 
 def call_proc (db_config: dict, proc_name: str, params : tuple):
@@ -10,9 +10,7 @@ def call_proc (db_config: dict, proc_name: str, params : tuple):
             raise ValueError('Cursor not created')
         try:
             res = cursor.callproc(proc_name, params)
-        except ProgrammingError as err:
-            print("error in procedure.py:",err)
-        except OperationalError as err:
+        except Error as err:
             print("error in procedure.py:",err)
     return res
 

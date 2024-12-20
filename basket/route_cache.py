@@ -9,6 +9,7 @@ import os
 from cache.wrapper import fetch_from_cache
 from database.select import select_dict
 from basket.model_route import model_route_transaction_order
+from basket.model_route import transaction_order
 
 
 
@@ -36,44 +37,36 @@ def basket_main():
         # adding to basket
         if not 'basket' in session:
             session['basket'] = dict()
-        _sql = provider.get('one_good.sql', e_prod_id=int(request.form['product_display']))
-        product = select_dict(db_config, _sql)[0]
-        print(product)
+        prid = int(request.form['product_display'])
         current_basket = session.get('basket', {})
-
         # сессия поддерживает сериализацию через json, поэтому ключ может быть только строчкой
         # сессия не запоминает изменения значений по ключу, только добавление или удалени
         # поэтому нужно вручную указывать изменение сессии
 
-        if str(product['prod_id']) in current_basket:
-            prid = product['prod_id']
+        if str(prid) in current_basket:
             amount = int(session['basket'][str(prid)])
             session['basket'][str(prid)] = str(amount+1)
             session.modified = True
         else:
-            print("NEW PRODUCT")
-            prid = product['prod_id']
             session['basket'][str(prid)] = '1'
             print(session['basket'])
             session.modified = True
 
     if request.form.get('product_display_plus'):
         # increasing count in basket
-        _sql = provider.get('one_good.sql', e_prod_id=int(request.form['product_display']))
-        product = select_dict(db_config, _sql)[0]
-        amount = int(session['basket'][str(product['prod_id'])])
-        session['basket'][str(product['prod_id'])] = str(amount + 1)
+        prid = int(request.form['product_display'])
+        amount = int(session['basket'][str(prid)])
+        session['basket'][str(prid)] = str(amount + 1)
         session.modified = True
 
     if request.form.get('product_display_minus'):
         # decreasing count in basket
-        _sql = provider.get('one_good.sql', e_prod_id=int(request.form['product_display']))
-        product = select_dict(db_config, _sql)[0]
-        amount = int(session['basket'][str(product['prod_id'])])
+        prid = int(request.form['product_display'])
+        amount = int(session['basket'][str(prid)])
         if amount == 1:
-            session['basket'].pop(str(product['prod_id']))
+            session['basket'].pop(str(prid))
         else:
-            session['basket'][str(product['prod_id'])] = str(amount-1)
+            session['basket'][str(prid)] = str(amount-1)
         session.modified = True
 
     return redirect(url_for('basket_bp.basket_index'))
@@ -86,24 +79,18 @@ def clear_basket():
 
 @blueprint_basket.route('/save_order')
 def save_order():
-    print("a")
     if not session.get('basket',{}):
         return redirect(url_for('basket_bp.basket_index'))
     if not session.get('user_id',""):
         return render_template("error.html", message="Вы не авторизованы на сайте, авторизируйтесь для регистрации заказа")
-    print("Order success")
     current_basket = session.get('basket', {})
     user_id = session.get('user_id',"")
-    result = model_route_transaction_order(current_app.config['db_config'], provider, current_basket, user_id)
+    result = transaction_order(current_app.config['db_config'], provider, current_basket, user_id)
     if result.status:
         clear_basket()
         return render_template("order_finish.html", order_id = result.result[0])
     else:
         return render_template("error.html", message="Заказ не был создан")
-
-
-
-
 
 
 def form_basket(current_basket : dict):

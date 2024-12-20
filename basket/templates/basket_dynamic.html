@@ -32,7 +32,7 @@
 </head>
 <body>
 <div class="main" style="width:900px;">
-    <a href="{{url_for('basket_bp.save_order')}}">Сделать заказ</a>
+
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -47,11 +47,14 @@
             </div>
             <div class="col-md-4">
                 <h2>Корзина</h2><br>
-                <a href="{{url_for('basket_bp.clear_basket')}}">Очистить корзину</a><br>
                 {% if basket %}
+                <a href="{{url_for('basket_bp.clear_basket')}}" class="submit" >Очистить корзину</a><br>
+                <hr />
                 {% for item in basket %}
                 {{ render_item(item, show_form = False, show_amount = True) }}
                 {% endfor %}
+                <hr />
+                <a href="{{url_for('basket_bp.save_order')}}" class="submit">Сделать заказ</a>
                 {% else %}
                 <span>Ваша корзина пуста</span>
                 {% endif %}

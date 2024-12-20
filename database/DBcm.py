@@ -21,7 +21,7 @@ class DBContextManager:
     def __exit__(self, exc_type, exc_val, exc_tb):
         # в параметрах метода лежат ошибки, которые передаёт sql сервер при ошибке
         if exc_type:
-            print(exc_type)
+            print("DBcm error", exc_type, exc_val, exc_tb)
         if self.cursor:
             if exc_type:
             # если на этапе выполнения произошли ошибки, но курсор при этом открыт, то скорее всего это транзакция и её надо откатить
