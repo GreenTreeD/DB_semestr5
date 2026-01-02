@@ -1,6 +1,5 @@
 from flask import Flask, render_template
-from pymysql import connect
-
+from pymysql import connect, OperationalError
 
 app = Flask(__name__)
 

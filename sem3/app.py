@@ -34,7 +34,6 @@ def product_handler():
 
 @app.route("/", methods=['POST'])
 def product_result_handler():
-
     user_data = request.form
     print("User data: ", user_data)
     res_info = model_route(app.config['db_config'], user_data, provider)
