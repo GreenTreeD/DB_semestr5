@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>Авторизация</h1>
+    <form method="POST" action="">
+      <div class="form-group">
+        <label for="login">Логин:</label>
+        <input type="text" id="login" name="login" required placeholder="Введите логин">
+      </div>
+      <div class="form-group">
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required placeholder="Введите пароль">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn-submit">Отправить</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}

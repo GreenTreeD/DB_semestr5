@@ -19,7 +19,7 @@ def group_required(func):
         if 'user_group' in session:
             user_role = session.get('user_group')
             user_request = request.endpoint
-            print('request_endpoint=', user_request)
+            # print('request_endpoint=', user_request)
             user_bp = user_request.split('.')[0]
             access = current_app.config['db_access']
             if user_role in access and user_bp in access[user_role]:
